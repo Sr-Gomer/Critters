@@ -15,21 +15,21 @@ public class SkillUI_U : MonoBehaviour
     [SerializeField]
     public int skillIndex;
 
-    public void fillText(Critter_U inGameCritter)
+    public void fillText(Skill_U castedSkill, string name, string power, string type, string affinity)
     {
-        if(inGameCritter.Moveset[skillIndex] is AttackSkill_U)
+        if(castedSkill is AttackSkill_U)
         {
-            name.text = inGameCritter.Moveset[skillIndex].name;
-            power.text = inGameCritter.Moveset[skillIndex].Power.ToString();
-            type.text = "Attack Skill";
-            affinity.text = inGameCritter.Moveset[skillIndex].Affinity.ToString();
+            this.name.text = name;
+            this.power.text = power;
+            this.type.text = "Attack Skill";
+            this.affinity.text = affinity;
         }
         else
         {
-            name.text = inGameCritter.Moveset[skillIndex].name;
-            power.text = "0";
-            type.text = (inGameCritter.Moveset[skillIndex] as SupportSkill_U).SuppType.ToString();
-            affinity.text = inGameCritter.Moveset[skillIndex].Affinity.ToString();
+            this.name.text = name;
+            this.power.text = "0";
+            this.type.text = type;
+            this.affinity.text = affinity;
         }
     }
 }

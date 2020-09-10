@@ -39,7 +39,11 @@ public class Judge_U : MonoBehaviour
         for (int i = 0; i < panels.Length; i++)
         {
             playerSkills[i] = panels[i].GetComponent<SkillUI_U>();
-            playerSkills[i].fillText(inGamePlayerCritter);
+            playerSkills[i].fillText(   inGamePlayerCritter.Moveset[i],
+                                        inGamePlayerCritter.Moveset[i].name, 
+                                        inGamePlayerCritter.Moveset[i].Power.ToString(), 
+                                        (inGamePlayerCritter.Moveset[i] as SupportSkill_U).SuppType.ToString(),
+                                        inGamePlayerCritter.Moveset[i].Affinity.ToString()                    );
         }
     }
 
@@ -138,7 +142,11 @@ public class Judge_U : MonoBehaviour
 
         for (int i = 0; i < panels.Length; i++)
         {
-            playerSkills[i].fillText(inGamePlayerCritter);
+            playerSkills[i].fillText(   inGamePlayerCritter.Moveset[i],
+                                        inGamePlayerCritter.Moveset[i].name,
+                                        inGamePlayerCritter.Moveset[i].Power.ToString(),
+                                        (inGamePlayerCritter.Moveset[i] as SupportSkill_U).SuppType.ToString(),
+                                        inGamePlayerCritter.Moveset[i].Affinity.ToString());
         }
     }
 
