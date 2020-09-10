@@ -55,7 +55,7 @@ public class Critter_U : MonoBehaviour
 
     public string TakeDamage(AttackSkill_U receivedSkill, Critter_U attakingCritter)
     {
-        float damageValue = (attakingCritter.BaseAttack + receivedSkill.Power) * AfinityMultiplier(receivedSkill);
+        float damageValue = (attakingCritter.BaseAttack + receivedSkill.Power) * AffinityMultiplier(receivedSkill);
         hp -= damageValue;
 
         return (Name + " ha recibido " + damageValue + " de daño, por " + receivedSkill.Name );
@@ -105,13 +105,13 @@ public class Critter_U : MonoBehaviour
         return message;
     }
 
-    public float AfinityMultiplier(AttackSkill_U recieveSkill)
+    public float AffinityMultiplier(AttackSkill_U recieveSkill)
     {
-        float afinityMultiplier = 0;
+        float affinityMultiplier = 0;
 
         if (Affinity.Equals("Earth") && recieveSkill.Affinity.Equals("Fire"))
         {
-            afinityMultiplier = 0;
+            affinityMultiplier = 0;
         }
         else 
         if (   (Affinity.Equals(recieveSkill.Affinity)) || 
@@ -119,7 +119,7 @@ public class Critter_U : MonoBehaviour
                (Affinity.Equals("Water") && recieveSkill.Affinity.Equals("Wind")) ||
                (Affinity.Equals("Earth") && recieveSkill.Affinity.Equals("Wind"))   )
         {
-            afinityMultiplier = 0.5f;
+            affinityMultiplier = 0.5f;
         }
         else 
         if (   (Affinity.Equals("Light") && recieveSkill.Affinity.Equals("Dark")) ||
@@ -128,13 +128,13 @@ public class Critter_U : MonoBehaviour
                (Affinity.Equals("Wind") && recieveSkill.Affinity.Equals("Water")) ||
                (Affinity.Equals("Wind") && recieveSkill.Affinity.Equals("Earth"))   )
         {
-            afinityMultiplier = 2f;
+            affinityMultiplier = 2f;
         }
         else
         {
-            afinityMultiplier = 1f;
+            affinityMultiplier = 1f;
         }
 
-        return afinityMultiplier;
+        return affinityMultiplier;
     }
 }

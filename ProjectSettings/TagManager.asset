@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Messages
   - Judge
+  - SkillInfo
   layers:
   - Default
   - TransparentFX

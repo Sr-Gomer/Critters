@@ -14,6 +14,9 @@ public class Judge_U : MonoBehaviour
     private GameObject gameMessagesPanel;
     private Text gameMessages;
 
+    private GameObject[] panels;
+    private SkillUI_U[] playerSkills;
+
     public void Initialize()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_U>();
@@ -26,6 +29,12 @@ public class Judge_U : MonoBehaviour
         gameMessages = gameMessagesPanel.GetComponentInChildren<Text>();
 
         gameMessagesPanel.SetActive(false);
+
+        panels = GameObject.FindGameObjectsWithTag("SkillInfo");
+        for (int i = 0; i < panels.Length; i++)
+        {
+
+        }
     }
 
     public Critter_U InGamePlayerCritter { get => inGamePlayerCritter;}
