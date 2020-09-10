@@ -11,6 +11,7 @@ public class SupportSkill_U : Skill_U
         DefUp,
         SpeedDown,
     }
+
     [SerializeField]
     private ESuppType suppType;
     
