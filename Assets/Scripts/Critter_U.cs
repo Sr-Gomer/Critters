@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class Critter_U : MonoBehaviour
 {
+    [Header("Critter Information")]
     [SerializeField]
     private string name;
     [SerializeField]
-    private int hp;
+    private float hp;
 
     [SerializeField]
     private int baseAttack;
@@ -32,7 +33,7 @@ public class Critter_U : MonoBehaviour
     public List<Skill_U> moveset = new List<Skill_U>();
 
     public string Name { get => name; }
-    public int HP { get => hp; }
+    public float HP { get => hp; }
     public int BaseAttack { get => baseAttack; }
     public int BaseDefense { get => baseDefense; }
     public int BaseSpeed { get => baseSpeed; }
@@ -58,12 +59,12 @@ public class Critter_U : MonoBehaviour
 
     public void TakeDamage(AttackSkill_U receivedSkill, Critter_U attakingCritter)
     {
-        int damageValue = (attakingCritter.BaseAttack + receivedSkill.Power);
+        float damageValue = (attakingCritter.BaseAttack + receivedSkill.Power) * AfinityMultiplier(receivedSkill);
         hp -= damageValue;
         //Console.WriteLine(attakingCritter.Name + " Le ha hecho " + damageValue + " Con la Skill " + receivedSkill.Name + " a " + Name);
     }
 
-    public void ReceiveBuff(SupportSkill_U receivedSkill)
+    public void ReceiveBuff(SupportSkill_U receivedSkill, Critter_U targetCritter)
     {
         if (receivedSkill.SuppType == SupportSkill_U.ESuppType.AtkUp && AtkUpCounter < 3)
         {
@@ -87,11 +88,7 @@ public class Critter_U : MonoBehaviour
         {
             //Console.WriteLine("La Defensa de " + Name + " No puede aumentar más");
         }
-    }
-
-    public void ThrowDebuff(Critter_U targetCritter)
-    {
-        if (targetCritter.SpeedDownCounter < 3)
+        else if (receivedSkill.SuppType == SupportSkill_U.ESuppType.SpeedDown && targetCritter.SpeedDownCounter < 3)
         {
             int speedValue = (targetCritter.SpeedStat - (targetCritter.BaseSpeed * 20) / 100);
             targetCritter.SpeedStat -= speedValue;
@@ -100,10 +97,47 @@ public class Critter_U : MonoBehaviour
         }
     }
 
-    public override bool Equals(object obj)
+    /*public void ThrowDebuff(Critter_U targetCritter)
     {
-        return obj is Critter_U u &&
-               base.Equals(obj) &&
-               AttackStat == u.AttackStat;
+        if (targetCritter.SpeedDownCounter < 3)
+        {
+            int speedValue = (targetCritter.SpeedStat - (targetCritter.BaseSpeed * 20) / 100);
+            targetCritter.SpeedStat -= speedValue;
+            //Console.WriteLine("La velocidad de " + targetCritter.Name + " ha bajado hasta " + speedValue);
+            targetCritter.SpeedDownCounter++;
+        }
+    }*/
+
+    public float AfinityMultiplier(AttackSkill_U recieveSkill)
+    {
+        float afinityMultiplier = 0;
+
+        if (Affinity.Equals("Earth") && recieveSkill.Affinity.Equals("Fire"))
+        {
+            afinityMultiplier = 0;
+        }
+        else 
+        if (   (Affinity.Equals(recieveSkill.Affinity)) || 
+               (Affinity.Equals("Fire") && recieveSkill.Affinity.Equals("Water")) || 
+               (Affinity.Equals("Water") && recieveSkill.Affinity.Equals("Wind")) ||
+               (Affinity.Equals("Earth") && recieveSkill.Affinity.Equals("Wind"))   )
+        {
+            afinityMultiplier = 0.5f;
+        }
+        else 
+        if (   (Affinity.Equals("Light") && recieveSkill.Affinity.Equals("Dark")) ||
+               (Affinity.Equals("Dark") && recieveSkill.Affinity.Equals("Light")) ||
+               (Affinity.Equals("Water") && recieveSkill.Affinity.Equals("Fire")) ||
+               (Affinity.Equals("Wind") && recieveSkill.Affinity.Equals("Water")) ||
+               (Affinity.Equals("Wind") && recieveSkill.Affinity.Equals("Earth"))   )
+        {
+            afinityMultiplier = 2f;
+        }
+        else
+        {
+            afinityMultiplier = 1f;
+        }
+
+        return afinityMultiplier;
     }
 }
