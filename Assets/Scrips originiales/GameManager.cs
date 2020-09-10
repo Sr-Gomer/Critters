@@ -22,7 +22,7 @@ namespace CRITTERS_
             resultado = "Darkar ha lanzado a " + fightingCritter1.Name + " y Mecoboy ha lanzado a " + fightingCritter2.Name;
 
             return resultado;
-         }
+        }
 
         public string ReplaceCritter(Critter critterReplaced)
         {
