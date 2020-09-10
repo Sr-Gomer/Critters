@@ -8,6 +8,7 @@ TagManager:
   - Messages
   - Judge
   - SkillInfo
+  - Skill
   layers:
   - Default
   - TransparentFX
