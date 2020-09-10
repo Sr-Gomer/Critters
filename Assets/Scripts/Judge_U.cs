@@ -22,7 +22,7 @@ public class Judge_U : MonoBehaviour
         inGamePlayerCritter = player.critters.Dequeue();
         inGameEnemyCritter = enemy.critters.Dequeue();
 
-        gameMessagesPanel = GameObject.FindGameObjectWithTag("Mesagess");
+        gameMessagesPanel = GameObject.FindGameObjectWithTag("Messages");
         gameMessages = gameMessagesPanel.GetComponentInChildren<Text>();
 
         gameMessagesPanel.SetActive(false);
@@ -55,14 +55,13 @@ public class Judge_U : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
 
-
         if (InGamePlayerCritter.Moveset[skillNumber] is AttackSkill_U)
         {
             gameMessages.text = InGameEnemyCritter.TakeDamage(InGamePlayerCritter.Moveset[skillNumber] as AttackSkill_U, InGamePlayerCritter);
 
             if(InGameEnemyCritter.HP <= 0)
             {
-
+                ChangeCritter(InGameEnemyCritter, player);
             }
         }
         else
@@ -82,6 +81,10 @@ public class Judge_U : MonoBehaviour
         if (InGameEnemyCritter.Moveset[enemySkillNumber] is AttackSkill_U)
         {
             gameMessages.text = InGamePlayerCritter.TakeDamage(InGameEnemyCritter.Moveset[enemySkillNumber] as AttackSkill_U, InGameEnemyCritter);
+            if (InGameEnemyCritter.HP <= 0)
+            {
+                ChangeCritter(InGamePlayerCritter, enemy);
+            }
         }
         else
         {
@@ -89,8 +92,9 @@ public class Judge_U : MonoBehaviour
         }
     }
 
-    private void ChangeCritter()
+    private void ChangeCritter(Critter_U deathCitter, Player_U newOwner)
     {
-
+        newOwner.AddCritter(deathCitter);
     }
+
 }
