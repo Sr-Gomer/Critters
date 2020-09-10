@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Player_U : MonoBehaviour
 {
-    public Queue<Critter_U> critters = new Queue<Critter_U>();
+    [SerializeField]
+    public List<Critter_U> critters = new List<Critter_U>();
 
     public void AddCritter(Critter_U critter)
     {
-        critters.Enqueue(critter);
+        critters.Add(critter);
     }
 }
