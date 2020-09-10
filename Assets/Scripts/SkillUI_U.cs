@@ -15,7 +15,7 @@ public class SkillUI_U : MonoBehaviour
     [SerializeField]
     public int skillIndex;
 
-    public void fillText(Skill_U castedSkill, string name, string power, string type, string affinity)
+    public void fillText(Skill_U castedSkill, string name, string power, string affinity)
     {
         if(castedSkill is AttackSkill_U)
         {
@@ -28,7 +28,7 @@ public class SkillUI_U : MonoBehaviour
         {
             this.name.text = name;
             this.power.text = "0";
-            this.type.text = type;
+            this.type.text = (castedSkill as SupportSkill_U).SuppType.ToString();
             this.affinity.text = affinity;
         }
     }

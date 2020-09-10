@@ -39,11 +39,11 @@ public class Judge_U : MonoBehaviour
         for (int i = 0; i < panels.Length; i++)
         {
             playerSkills[i] = panels[i].GetComponent<SkillUI_U>();
+
             playerSkills[i].fillText(   inGamePlayerCritter.Moveset[i],
-                                        inGamePlayerCritter.Moveset[i].name, 
-                                        inGamePlayerCritter.Moveset[i].Power.ToString(), 
-                                        (inGamePlayerCritter.Moveset[i] as SupportSkill_U).SuppType.ToString(),
-                                        inGamePlayerCritter.Moveset[i].Affinity.ToString()                    );
+                                        inGamePlayerCritter.Moveset[i].Name,
+                                        inGamePlayerCritter.Moveset[i].Power.ToString(),
+                                        inGamePlayerCritter.Moveset[i].Affinity.ToString());
         }
     }
 
@@ -56,23 +56,21 @@ public class Judge_U : MonoBehaviour
 
         if (InGamePlayerCritter.SpeedStat >= InGameEnemyCritter.SpeedStat)
         {
-            StartCoroutine(PlayerAction(skillNumber));
-            StartCoroutine(EnemyAction());
-
-            gameMessagesPanel.SetActive(false);
+            StartCoroutine(PlayerAction(skillNumber, 0f));
+            StartCoroutine(EnemyAction(3f));
         }
         else
         {
-            StartCoroutine(EnemyAction());
-            StartCoroutine(PlayerAction(skillNumber));
-
-            gameMessagesPanel.SetActive(false);
+            StartCoroutine(EnemyAction(0f));
+            StartCoroutine(PlayerAction(skillNumber, 3f));
         }
+
+        gameMessagesPanel.SetActive(false);
     }
 
-    IEnumerator PlayerAction(int skillNumber)
+    IEnumerator PlayerAction(int skillNumber,float timeDelay)
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(timeDelay);
 
         if (InGamePlayerCritter.Moveset[skillNumber] is AttackSkill_U)
         {
@@ -85,13 +83,13 @@ public class Judge_U : MonoBehaviour
         }
         else
         {
-            gameMessages.text = InGameEnemyCritter.ReceiveBuff(InGamePlayerCritter.Moveset[skillNumber] as SupportSkill_U, InGamePlayerCritter);
+            gameMessages.text = InGamePlayerCritter.ReceiveBuff(InGamePlayerCritter.Moveset[skillNumber] as SupportSkill_U, inGameEnemyCritter);
         }
     }
 
-    IEnumerator EnemyAction()
+    IEnumerator EnemyAction(float timeDelay)
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(timeDelay);
 
         int enemySkillNumber;
 
@@ -108,7 +106,7 @@ public class Judge_U : MonoBehaviour
         }
         else
         {
-            gameMessages.text = InGamePlayerCritter.ReceiveBuff(InGameEnemyCritter.Moveset[enemySkillNumber] as SupportSkill_U, InGameEnemyCritter);
+            gameMessages.text = InGameEnemyCritter.ReceiveBuff(InGameEnemyCritter.Moveset[enemySkillNumber] as SupportSkill_U, InGamePlayerCritter);
         }
     }
 
@@ -133,21 +131,25 @@ public class Judge_U : MonoBehaviour
             inGamePlayerCritter = oldOwner.critters[oldOwner.critters.IndexOf(deathCitter) + 1];
             inGamePlayerCritter.gameObject.SetActive(true);
             playerDeathCount++;
+
+            for (int i = 0; i < panels.Length; i++)
+            {
+                playerSkills[i].fillText(inGamePlayerCritter.Moveset[i],
+                                            inGamePlayerCritter.Moveset[i].name,
+                                            inGamePlayerCritter.Moveset[i].Power.ToString(),
+                                            inGamePlayerCritter.Moveset[i].Affinity.ToString());
+            }
         }
         else if (playerDeathCount >= 3)
         {
             gameMessagesPanel.SetActive(true);
             gameMessages.text = "Defeat";
         }
+    }
 
-        for (int i = 0; i < panels.Length; i++)
-        {
-            playerSkills[i].fillText(   inGamePlayerCritter.Moveset[i],
-                                        inGamePlayerCritter.Moveset[i].name,
-                                        inGamePlayerCritter.Moveset[i].Power.ToString(),
-                                        (inGamePlayerCritter.Moveset[i] as SupportSkill_U).SuppType.ToString(),
-                                        inGamePlayerCritter.Moveset[i].Affinity.ToString());
-        }
+    private void ActivatedPanel()
+    {
+        Game
     }
 
 }
