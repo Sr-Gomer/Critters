@@ -53,9 +53,15 @@ public class Critter_U : MonoBehaviour
         Dark
     }
 
+    public void SetStats()
+    {
+        AttackStat = BaseAttack;
+        DefenseStat = BaseDefense;
+        SpeedStat = BaseSpeed;
+    }
     public string TakeDamage(AttackSkill_U receivedSkill, Critter_U attakingCritter)
     {
-        float damageValue = (attakingCritter.BaseAttack + receivedSkill.Power) * AffinityMultiplier(receivedSkill);
+        float damageValue = (attakingCritter.AttackStat + receivedSkill.Power) * AffinityMultiplier(receivedSkill);
         hp -= damageValue;
 
         return (Name + " ha recibido " + damageValue + " de daño, por " + receivedSkill.Name );
@@ -109,24 +115,24 @@ public class Critter_U : MonoBehaviour
     {
         float affinityMultiplier = 0;
 
-        if (Affinity.Equals("Earth") && recieveSkill.Affinity.Equals("Fire"))
+        if (Affinity == Eaffinity.Earth && recieveSkill.Affinity.ToString() == Eaffinity.Fire.ToString())
         {
             affinityMultiplier = 0;
         }
         else 
-        if (   (Affinity.Equals(recieveSkill.Affinity)) || 
-               (Affinity.Equals("Fire") && recieveSkill.Affinity.Equals("Water")) || 
-               (Affinity.Equals("Water") && recieveSkill.Affinity.Equals("Wind")) ||
-               (Affinity.Equals("Earth") && recieveSkill.Affinity.Equals("Wind"))   )
+        if (   (Affinity.ToString() == recieveSkill.Affinity.ToString()) || 
+               (Affinity == Eaffinity.Fire && recieveSkill.Affinity.ToString() == Eaffinity.Water.ToString()) || 
+               (Affinity == Eaffinity.Water && recieveSkill.Affinity.ToString() == Eaffinity.Wind.ToString()) ||
+               (Affinity == Eaffinity.Earth && recieveSkill.Affinity.ToString() == Eaffinity.Wind.ToString())   )
         {
             affinityMultiplier = 0.5f;
         }
         else 
-        if (   (Affinity.Equals("Light") && recieveSkill.Affinity.Equals("Dark")) ||
-               (Affinity.Equals("Dark") && recieveSkill.Affinity.Equals("Light")) ||
-               (Affinity.Equals("Water") && recieveSkill.Affinity.Equals("Fire")) ||
-               (Affinity.Equals("Wind") && recieveSkill.Affinity.Equals("Water")) ||
-               (Affinity.Equals("Wind") && recieveSkill.Affinity.Equals("Earth"))   )
+        if (   (Affinity == Eaffinity.Light && recieveSkill.Affinity.ToString() == Eaffinity.Dark.ToString()) ||
+               (Affinity == Eaffinity.Dark && recieveSkill.Affinity.ToString() == Eaffinity.Light.ToString()) ||
+               (Affinity == Eaffinity.Water && recieveSkill.Affinity.ToString() == Eaffinity.Fire.ToString()) ||
+               (Affinity == Eaffinity.Wind && recieveSkill.Affinity.ToString() == Eaffinity.Water.ToString()) ||
+               (Affinity == Eaffinity.Wind && recieveSkill.Affinity.ToString() == Eaffinity.Earth.ToString())   )
         {
             affinityMultiplier = 2f;
         }

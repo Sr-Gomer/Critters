@@ -17,6 +17,9 @@ public class Judge_U : MonoBehaviour
     private GameObject[] panels;
     private SkillUI_U[] playerSkills = new SkillUI_U[3];
 
+    private CritterInfo_U playerCritterInfo;
+    private CritterInfo_U enemyCritterInfo;
+
     private int playerDeathCount = 0, enemyDeathCount = 0;
 
     public void Initialize()
@@ -25,10 +28,18 @@ public class Judge_U : MonoBehaviour
         enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Player_U>();
 
         inGamePlayerCritter = player.critters[0];
+        inGamePlayerCritter.SetStats();
         inGameEnemyCritter = enemy.critters[0];
+        inGameEnemyCritter.SetStats();
 
         inGamePlayerCritter.gameObject.SetActive(true);
         inGameEnemyCritter.gameObject.SetActive(true);
+
+        playerCritterInfo = GameObject.Find("UI_P").GetComponent<CritterInfo_U>();
+        enemyCritterInfo = GameObject.Find("UI_E").GetComponent<CritterInfo_U>();
+
+        playerCritterInfo.SetBaseValues(InGamePlayerCritter.HP,InGamePlayerCritter.Name,InGamePlayerCritter.Affinity.ToString());
+        enemyCritterInfo.SetBaseValues(InGameEnemyCritter.HP,InGameEnemyCritter.Name,InGameEnemyCritter.Affinity.ToString());
 
         gameMessagesPanel = GameObject.FindGameObjectWithTag("Messages");
         gameMessages = gameMessagesPanel.GetComponentInChildren<Text>();
@@ -45,14 +56,15 @@ public class Judge_U : MonoBehaviour
                                         inGamePlayerCritter.Moveset[i].Power.ToString(),
                                         inGamePlayerCritter.Moveset[i].Affinity.ToString());
         }
+
+        
     }
 
-    public Critter_U InGamePlayerCritter { get => inGamePlayerCritter;}
-    public Critter_U InGameEnemyCritter { get => inGameEnemyCritter;}
+    public Critter_U InGamePlayerCritter { get => inGamePlayerCritter; private set { inGamePlayerCritter = value; } }
+    public Critter_U InGameEnemyCritter { get => inGameEnemyCritter; private set { inGameEnemyCritter = value; } }
 
     public void Action(int skillNumber)
     {
-        gameMessagesPanel.SetActive(true);
 
         if (InGamePlayerCritter.SpeedStat >= InGameEnemyCritter.SpeedStat)
         {
@@ -63,18 +75,17 @@ public class Judge_U : MonoBehaviour
         {
             StartCoroutine(EnemyAction(0f));
             StartCoroutine(PlayerAction(skillNumber, 3f));
-        }
-
-        gameMessagesPanel.SetActive(false);
+        }     
     }
 
     IEnumerator PlayerAction(int skillNumber,float timeDelay)
     {
         yield return new WaitForSeconds(timeDelay);
-
+        gameMessagesPanel.SetActive(true);
         if (InGamePlayerCritter.Moveset[skillNumber] is AttackSkill_U)
         {
             gameMessages.text = InGameEnemyCritter.TakeDamage(InGamePlayerCritter.Moveset[skillNumber] as AttackSkill_U, InGamePlayerCritter);
+            enemyCritterInfo.UpdateHP(InGameEnemyCritter.HP);
 
             if(InGameEnemyCritter.HP <= 0)
             {
@@ -85,11 +96,15 @@ public class Judge_U : MonoBehaviour
         {
             gameMessages.text = InGamePlayerCritter.ReceiveBuff(InGamePlayerCritter.Moveset[skillNumber] as SupportSkill_U, inGameEnemyCritter);
         }
+       
+        yield return new WaitForSeconds(timeDelay + 2.98f);
+        gameMessagesPanel.SetActive(false);
     }
 
     IEnumerator EnemyAction(float timeDelay)
     {
         yield return new WaitForSeconds(timeDelay);
+        gameMessagesPanel.SetActive(true);
 
         int enemySkillNumber;
 
@@ -98,8 +113,8 @@ public class Judge_U : MonoBehaviour
         if (InGameEnemyCritter.Moveset[enemySkillNumber] is AttackSkill_U)
         {
             gameMessages.text = InGamePlayerCritter.TakeDamage(InGameEnemyCritter.Moveset[enemySkillNumber] as AttackSkill_U, InGameEnemyCritter);
-
-            if (InGameEnemyCritter.HP <= 0)
+            playerCritterInfo.UpdateHP(InGamePlayerCritter.HP);
+            if (InGamePlayerCritter.HP <= 0)
             {
                 ChangeCritter(InGamePlayerCritter, enemy, player, true);
             }
@@ -108,48 +123,54 @@ public class Judge_U : MonoBehaviour
         {
             gameMessages.text = InGameEnemyCritter.ReceiveBuff(InGameEnemyCritter.Moveset[enemySkillNumber] as SupportSkill_U, InGamePlayerCritter);
         }
+        yield return new WaitForSeconds(timeDelay + 2.98f);
+        gameMessagesPanel.SetActive(false);
     }
 
-    private void ChangeCritter(Critter_U deathCitter, Player_U newOwner, Player_U oldOwner, bool isPlayer)
+    private void ChangeCritter(Critter_U deathCitter, Player_U newOwner, Player_U oldOwner, bool isPlayer) 
     {
         newOwner.AddCritter(deathCitter);
         deathCitter.gameObject.SetActive(false);
 
-        if (isPlayer && enemyDeathCount < 3)
+        if (isPlayer && playerDeathCount < 3)
         {
-            inGameEnemyCritter = oldOwner.critters[oldOwner.critters.IndexOf(deathCitter) + 1];
-            inGameEnemyCritter.gameObject.SetActive(true);
-            enemyDeathCount++;
-        }
-        else if (enemyDeathCount >= 3)
-        {
-            gameMessagesPanel.SetActive(true);
-            gameMessages.text = "Victory";
-        }
-        else if (!isPlayer && playerDeathCount < 3)
-        {
-            inGamePlayerCritter = oldOwner.critters[oldOwner.critters.IndexOf(deathCitter) + 1];
-            inGamePlayerCritter.gameObject.SetActive(true);
+            InGamePlayerCritter = oldOwner.critters[oldOwner.critters.IndexOf(deathCitter) + 1];
+            InGamePlayerCritter.gameObject.SetActive(true);
+            InGamePlayerCritter.SetStats();
+            playerCritterInfo.SetBaseValues(InGamePlayerCritter.HP, InGamePlayerCritter.Name, InGamePlayerCritter.Affinity.ToString());
             playerDeathCount++;
 
             for (int i = 0; i < panels.Length; i++)
             {
-                playerSkills[i].fillText(inGamePlayerCritter.Moveset[i],
-                                            inGamePlayerCritter.Moveset[i].name,
-                                            inGamePlayerCritter.Moveset[i].Power.ToString(),
-                                            inGamePlayerCritter.Moveset[i].Affinity.ToString());
+                playerSkills[i].fillText(InGamePlayerCritter.Moveset[i],
+                                            InGamePlayerCritter.Moveset[i].name,
+                                            InGamePlayerCritter.Moveset[i].Power.ToString(),
+                                            InGamePlayerCritter.Moveset[i].Affinity.ToString());
             }
         }
         else if (playerDeathCount >= 3)
+        {
+            gameMessagesPanel.SetActive(true);
+            gameMessages.text = "Victory";
+        }
+        else if (!isPlayer && enemyDeathCount < 3)
+        {
+            InGameEnemyCritter = oldOwner.critters[oldOwner.critters.IndexOf(deathCitter) + 1];
+            InGameEnemyCritter.gameObject.SetActive(true);
+            InGameEnemyCritter.SetStats();
+            enemyDeathCount++;
+            enemyCritterInfo.SetBaseValues(InGameEnemyCritter.HP, InGameEnemyCritter.Name, InGameEnemyCritter.Affinity.ToString());
+
+
+
+        }
+        else if (enemyDeathCount >= 3)
         {
             gameMessagesPanel.SetActive(true);
             gameMessages.text = "Defeat";
         }
     }
 
-    private void ActivatedPanel()
-    {
-        Game
-    }
+
 
 }
