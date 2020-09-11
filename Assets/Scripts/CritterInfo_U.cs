@@ -34,7 +34,7 @@ public class CritterInfo_U : MonoBehaviour
 
     public void UpdateHP(float hpValue)
     {
-      
+        CritterHealth.value = hpValue;
     }
 
     

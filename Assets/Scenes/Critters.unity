@@ -1611,6 +1611,26 @@ MonoBehaviour:
   type: {fileID: 302084292}
   affinity: {fileID: 409727579}
   skillIndex: 2
+--- !u!1 &857966355 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6292487415333353798, guid: 9127f861f7a4c02409b4516f9c2556cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 6292487415369759814}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &857966359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 857966355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1779d24470016ea4681f7cdcbfb189d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NameOBJ: Critter Name_E
+  AffinityOBJ: Critter Afinity_E
 --- !u!224 &899935297 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1393376637129002971, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
@@ -2432,6 +2452,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 384cf7c564bc79344acd1266e6973acb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1866092208 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1393376636085276519, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1393376637890126746}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1866092212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866092208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1779d24470016ea4681f7cdcbfb189d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NameOBJ: Critter Name_P
+  AffinityOBJ: Critter Afinity_P
 --- !u!1 &2031772713
 GameObject:
   m_ObjectHideFlags: 0
@@ -2629,6 +2669,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1393376636085276519, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
+        type: 3}
+      propertyPath: m_Name
+      value: UI_P
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393376636429513187, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
+        type: 3}
+      propertyPath: m_Name
+      value: Critter Name_P
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393376636476036988, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
+        type: 3}
+      propertyPath: m_Name
+      value: Critter Afinity_P
+      objectReference: {fileID: 0}
     - target: {fileID: 1393376636951992542, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -2813,6 +2868,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393376637985812742, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
+        type: 3}
+      propertyPath: m_Name
+      value: Life_P
       objectReference: {fileID: 0}
     - target: {fileID: 3147033728630581432, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
         type: 3}
@@ -3048,6 +3108,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5900034376352845827, guid: 101a2deb5ec5aa8419226838fc1971d1,
         type: 3}
+    - target: {fileID: 6292487414956408697, guid: 9127f861f7a4c02409b4516f9c2556cf,
+        type: 3}
+      propertyPath: m_Name
+      value: Critter Name_E
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292487415333353798, guid: 9127f861f7a4c02409b4516f9c2556cf,
+        type: 3}
+      propertyPath: m_Name
+      value: UI_E
+      objectReference: {fileID: 0}
     - target: {fileID: 6292487415408158953, guid: 9127f861f7a4c02409b4516f9c2556cf,
         type: 3}
       propertyPath: m_Name
@@ -3167,6 +3237,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292487415742081476, guid: 9127f861f7a4c02409b4516f9c2556cf,
+        type: 3}
+      propertyPath: m_Name
+      value: Critter Afinity_E
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292487416588749262, guid: 9127f861f7a4c02409b4516f9c2556cf,
+        type: 3}
+      propertyPath: m_Name
+      value: Life_E
       objectReference: {fileID: 0}
     - target: {fileID: 6292487416751081815, guid: 9127f861f7a4c02409b4516f9c2556cf,
         type: 3}
