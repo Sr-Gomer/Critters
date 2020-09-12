@@ -2800,12 +2800,12 @@ PrefabInstance:
     - target: {fileID: 1393376637339312361, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
         type: 3}
       propertyPath: hp
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1393376637339312361, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
         type: 3}
       propertyPath: baseSpeed
-      value: 1
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1393376637339312362, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
         type: 3}
