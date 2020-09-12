@@ -22,6 +22,9 @@ public class Judge_U : MonoBehaviour
 
     private int playerDeathCount = 0, enemyDeathCount = 0;
 
+    private bool isDeadPlayer;
+    private bool isDeadEnemy;
+
     public void Initialize()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_U>();
@@ -57,7 +60,8 @@ public class Judge_U : MonoBehaviour
                                         inGamePlayerCritter.Moveset[i].Affinity.ToString());
         }
 
-        
+        isDeadPlayer = false;
+        isDeadEnemy = false;
     }
 
     public Critter_U InGamePlayerCritter { get => inGamePlayerCritter; private set { inGamePlayerCritter = value; } }
@@ -150,6 +154,7 @@ public class Judge_U : MonoBehaviour
                 InGamePlayerCritter.gameObject.SetActive(true);
                 InGamePlayerCritter.SetStats();
                 playerCritterInfo.SetBaseValues(InGamePlayerCritter.HP, InGamePlayerCritter.Name, InGamePlayerCritter.Affinity.ToString());
+                playerCritterInfo.HideCrittersIndicator(oldOwner.critters.IndexOf(deathCitter));
             }
 
             for (int i = 0; i < panels.Length; i++)
@@ -165,6 +170,7 @@ public class Judge_U : MonoBehaviour
             {
                 gameMessagesPanel.SetActive(true);
                 gameMessages.text = "Defeat";
+                playerCritterInfo.HideLastCritter();
             }
 
         }
@@ -177,10 +183,12 @@ public class Judge_U : MonoBehaviour
                 InGameEnemyCritter.gameObject.SetActive(true);
                 InGameEnemyCritter.SetStats();
                 enemyCritterInfo.SetBaseValues(InGameEnemyCritter.HP, InGameEnemyCritter.Name, InGameEnemyCritter.Affinity.ToString());
+                enemyCritterInfo.HideCrittersIndicator(oldOwner.critters.IndexOf(deathCitter));
             }
 
             if (enemyDeathCount >= 3)
             {
+                enemyCritterInfo.HideLastCritter();
                 gameMessagesPanel.SetActive(true);
                 gameMessages.text = "Victory";
             }

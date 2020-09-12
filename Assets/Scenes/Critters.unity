@@ -1631,6 +1631,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NameOBJ: Critter Name_E
   AffinityOBJ: Critter Afinity_E
+  CrittersIndicatorName: EnemyCrittersIndicator
 --- !u!224 &899935297 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1393376637129002971, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
@@ -2472,6 +2473,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NameOBJ: Critter Name_P
   AffinityOBJ: Critter Afinity_P
+  CrittersIndicatorName: PlayerCrittersIndicator
 --- !u!1 &2031772713
 GameObject:
   m_ObjectHideFlags: 0
@@ -2694,6 +2696,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Critter Afinity_P
       objectReference: {fileID: 0}
+    - target: {fileID: 1393376636597451496, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerCrittersIndicator1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393376636597451502, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393376636597451502, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393376636597451502, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1393376636951992542, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -2834,6 +2856,26 @@ PrefabInstance:
       propertyPath: critters.Array.data[2]
       value: 
       objectReference: {fileID: 1393376637890126747}
+    - target: {fileID: 1393376637175137459, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393376637175137459, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393376637175137459, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393376637175137469, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerCrittersIndicator3
+      objectReference: {fileID: 0}
     - target: {fileID: 1393376637184755049, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
         type: 3}
       propertyPath: m_AnchorMin.x
@@ -2878,6 +2920,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393376637634494997, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393376637634494997, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393376637634494997, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393376637634494999, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerCrittersIndicator2
       objectReference: {fileID: 0}
     - target: {fileID: 1393376637985812742, guid: 97bdfcc5c4ae986429e23cbb6ad3dcc3,
         type: 3}
@@ -3133,6 +3195,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Critter Name_E
       objectReference: {fileID: 0}
+    - target: {fileID: 6292487415187372377, guid: 9127f861f7a4c02409b4516f9c2556cf,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292487415187372377, guid: 9127f861f7a4c02409b4516f9c2556cf,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyCrittersIndicator2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292487415187372391, guid: 9127f861f7a4c02409b4516f9c2556cf,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292487415187372391, guid: 9127f861f7a4c02409b4516f9c2556cf,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292487415187372391, guid: 9127f861f7a4c02409b4516f9c2556cf,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6292487415333353798, guid: 9127f861f7a4c02409b4516f9c2556cf,
         type: 3}
       propertyPath: m_Name
@@ -3263,6 +3350,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Critter Afinity_E
       objectReference: {fileID: 0}
+    - target: {fileID: 6292487416091616972, guid: 9127f861f7a4c02409b4516f9c2556cf,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292487416091616972, guid: 9127f861f7a4c02409b4516f9c2556cf,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292487416091616972, guid: 9127f861f7a4c02409b4516f9c2556cf,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292487416091616974, guid: 9127f861f7a4c02409b4516f9c2556cf,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292487416091616974, guid: 9127f861f7a4c02409b4516f9c2556cf,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyCrittersIndicator3
+      objectReference: {fileID: 0}
     - target: {fileID: 6292487416588749262, guid: 9127f861f7a4c02409b4516f9c2556cf,
         type: 3}
       propertyPath: m_Name
@@ -3282,6 +3394,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292487416870159440, guid: 9127f861f7a4c02409b4516f9c2556cf,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292487416870159440, guid: 9127f861f7a4c02409b4516f9c2556cf,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292487416870159440, guid: 9127f861f7a4c02409b4516f9c2556cf,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292487416870159442, guid: 9127f861f7a4c02409b4516f9c2556cf,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292487416870159442, guid: 9127f861f7a4c02409b4516f9c2556cf,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyCrittersIndicator1
       objectReference: {fileID: 0}
     - target: {fileID: 7651911967552073074, guid: 9127f861f7a4c02409b4516f9c2556cf,
         type: 3}
