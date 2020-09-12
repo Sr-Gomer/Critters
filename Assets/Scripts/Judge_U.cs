@@ -11,6 +11,8 @@ public class Judge_U : MonoBehaviour
     private Critter_U inGamePlayerCritter;
     private Critter_U inGameEnemyCritter;
 
+    private bool kill;
+
     private GameObject gameMessagesPanel;
     private Text gameMessages;
 
@@ -69,73 +71,89 @@ public class Judge_U : MonoBehaviour
 
     public void Action(int skillNumber)
     {
-
+        kill = false;
         if (InGamePlayerCritter.SpeedStat >= InGameEnemyCritter.SpeedStat)
         {
             StartCoroutine(PlayerAction(skillNumber, 0f));
+
             StartCoroutine(EnemyAction(3f));
+
+            
+            
         }
         else
         {
+            
             StartCoroutine(EnemyAction(0f));
+
             StartCoroutine(PlayerAction(skillNumber, 3f));
+
         }     
     }
 
     IEnumerator PlayerAction(int skillNumber,float timeDelay)
     {
         yield return new WaitForSeconds(timeDelay);
-        gameMessagesPanel.SetActive(true);
-        if (InGamePlayerCritter.Moveset[skillNumber] is AttackSkill_U)
+        if (!kill)
         {
-            gameMessages.text = InGameEnemyCritter.TakeDamage(InGamePlayerCritter.Moveset[skillNumber] as AttackSkill_U, InGamePlayerCritter);
-            enemyCritterInfo.UpdateHP(InGameEnemyCritter.HP);
+            gameMessagesPanel.SetActive(true);
 
-            if(InGameEnemyCritter.HP <= 0)
+            if (InGamePlayerCritter.Moveset[skillNumber] is AttackSkill_U)
             {
-                ChangeCritter(InGameEnemyCritter, player, enemy, false);
+                gameMessages.text = InGameEnemyCritter.TakeDamage(InGamePlayerCritter.Moveset[skillNumber] as AttackSkill_U, InGamePlayerCritter);
+                enemyCritterInfo.UpdateHP(InGameEnemyCritter.HP);
+
+                if (InGameEnemyCritter.HP <= 0)
+                {
+                    ChangeCritter(InGameEnemyCritter, player, enemy, false);
+                    kill = true;
+                }
             }
-        }
-        else
-        {
-            gameMessages.text = InGamePlayerCritter.ReceiveBuff(InGamePlayerCritter.Moveset[skillNumber] as SupportSkill_U, inGameEnemyCritter);
-        }
+            else
+            {
+                gameMessages.text = InGamePlayerCritter.ReceiveBuff(InGamePlayerCritter.Moveset[skillNumber] as SupportSkill_U, inGameEnemyCritter);
+            }
 
 
-        if (enemyDeathCount < 3)
-        {
-            yield return new WaitForSeconds(timeDelay + 2.98f);
-            gameMessagesPanel.SetActive(false); 
+            if (enemyDeathCount < 3)
+            {
+                yield return new WaitForSeconds(timeDelay + 2.98f);
+                gameMessagesPanel.SetActive(false);
+            }
         }
     }
 
     IEnumerator EnemyAction(float timeDelay)
     {
         yield return new WaitForSeconds(timeDelay);
-        gameMessagesPanel.SetActive(true);
-
-        int enemySkillNumber;
-
-        enemySkillNumber = Random.Range(0, 3);
-
-        if (InGameEnemyCritter.Moveset[enemySkillNumber] is AttackSkill_U)
+        if (!kill)
         {
-            gameMessages.text = InGamePlayerCritter.TakeDamage(InGameEnemyCritter.Moveset[enemySkillNumber] as AttackSkill_U, InGameEnemyCritter);
-            playerCritterInfo.UpdateHP(InGamePlayerCritter.HP);
-            if (InGamePlayerCritter.HP <= 0)
+            gameMessagesPanel.SetActive(true);
+
+            int enemySkillNumber;
+
+            enemySkillNumber = Random.Range(0, 3);
+
+            if (InGameEnemyCritter.Moveset[enemySkillNumber] is AttackSkill_U)
             {
-                ChangeCritter(InGamePlayerCritter, enemy, player, true);
+                gameMessages.text = InGamePlayerCritter.TakeDamage(InGameEnemyCritter.Moveset[enemySkillNumber] as AttackSkill_U, InGameEnemyCritter);
+                playerCritterInfo.UpdateHP(InGamePlayerCritter.HP);
+                if (InGamePlayerCritter.HP <= 0)
+                {
+                    ChangeCritter(InGamePlayerCritter, enemy, player, true);
+                    kill = true;
+                }
             }
-        }
-        else
-        {
-            gameMessages.text = InGameEnemyCritter.ReceiveBuff(InGameEnemyCritter.Moveset[enemySkillNumber] as SupportSkill_U, InGamePlayerCritter);
-        }
+            else
+            {
+                gameMessages.text = InGameEnemyCritter.ReceiveBuff(InGameEnemyCritter.Moveset[enemySkillNumber] as SupportSkill_U, InGamePlayerCritter);
+            }
 
-        if (playerDeathCount < 3)
-        {
-            yield return new WaitForSeconds(timeDelay + 2.98f);
-            gameMessagesPanel.SetActive(false);
+            if (playerDeathCount < 3)
+            {
+                yield return new WaitForSeconds(timeDelay + 2.98f);
+                gameMessagesPanel.SetActive(false);
+            }
         }
         
     }
