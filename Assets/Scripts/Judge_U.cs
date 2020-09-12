@@ -11,6 +11,7 @@ public class Judge_U : MonoBehaviour
     private Critter_U inGamePlayerCritter;
     private Critter_U inGameEnemyCritter;
 
+
     private GameObject gameMessagesPanel;
     private Text gameMessages;
 
@@ -69,16 +70,23 @@ public class Judge_U : MonoBehaviour
 
     public void Action(int skillNumber)
     {
-
+        
         if (InGamePlayerCritter.SpeedStat >= InGameEnemyCritter.SpeedStat)
         {
             StartCoroutine(PlayerAction(skillNumber, 0f));
+
             StartCoroutine(EnemyAction(3f));
+
+            
+            
         }
         else
         {
+            
             StartCoroutine(EnemyAction(0f));
+
             StartCoroutine(PlayerAction(skillNumber, 3f));
+
         }     
     }
 
